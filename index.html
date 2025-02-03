@@ -104,10 +104,6 @@
   </header>
   
   <div class="container">
-    <!-- Last Week Section -->
-    <div class="header-line">Last Week</div>
-    <div id="last-week"></div>
-
     <!-- This Week Section -->
     <div class="header-line">This Week</div>
     <div id="this-week"></div>
@@ -157,14 +153,6 @@
       endOfWeek.setDate(startOfWeek.getDate() + 6);
       endOfWeek.setHours(23, 59, 59, 999);
 
-      // Calculate boundaries for "Last Week" (previous Sunday to Saturday)
-      const lastWeekStart = new Date(startOfWeek);
-      lastWeekStart.setDate(startOfWeek.getDate() - 7);
-      lastWeekStart.setHours(0, 0, 0, 0);
-      const lastWeekEnd = new Date(lastWeekStart);
-      lastWeekEnd.setDate(lastWeekStart.getDate() + 6);
-      lastWeekEnd.setHours(23, 59, 59, 999);
-
       // Calculate boundaries for "Next Week" (upcoming Sunday to Saturday)
       const nextWeekStart = new Date(endOfWeek);
       nextWeekStart.setDate(endOfWeek.getDate() + 1);
@@ -175,7 +163,6 @@
 
       // Mapping of section elements
       const sectionIds = {
-        "Last Week": document.getElementById('last-week'),
         "This Week": document.getElementById('this-week'),
         "Next Week": document.getElementById('next-week'),
       };
@@ -194,7 +181,6 @@
 
       // Prepare storage for week-based sections
       const eventsBySection = {
-        "Last Week": {},
         "This Week": {},
         "Next Week": {}
       };
@@ -233,12 +219,7 @@
             : formatDate(startDate);
 
           // Group events into the appropriate section based on their start date
-          if (eventDate >= lastWeekStart && eventDate <= lastWeekEnd) {
-            eventsBySection["Last Week"][matchedCategory].push({
-              title: title.replace(/\(.*?\)/, "").trim(),
-              date: formattedDate,
-            });
-          } else if (eventDate >= startOfWeek && eventDate <= endOfWeek) {
+          if (eventDate >= startOfWeek && eventDate <= endOfWeek) {
             eventsBySection["This Week"][matchedCategory].push({
               title: title.replace(/\(.*?\)/, "").trim(),
               date: formattedDate,
@@ -271,7 +252,7 @@
       }
 
       // Define the order in which week sections should appear
-      const sectionsOrder = ["Last Week", "This Week", "Next Week"];
+      const sectionsOrder = ["This Week", "Next Week"];
       sectionsOrder.forEach(section => {
         const catGroups = eventsBySection[section];
         const sectionElement = sectionIds[section];
