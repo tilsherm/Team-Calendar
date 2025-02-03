@@ -1,244 +1,329 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Military Sherpa Calendar</title>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Montserrat', sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(135deg, #1a1a1a, #333);
-            color: #f4f4f4;
-        }
-        header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.8);
-            border-bottom: 2px solid #444;
-        }
-        header img {
-            height: 50px;
-        }
-        header h1 {
-            font-size: 24px;
-            font-weight: 700;
-            color: #fff;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-        .header-line {
-            text-align: center;
-            margin: 40px 0 20px;
-            font-size: 24px;
-            font-weight: 700;
-            color: #fff; /* White for time period headers */
-            position: relative;
-        }
-        .header-line::before,
-        .header-line::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            width: 30%;
-            height: 2px;
-            background: #fff; /* White lines for time period headers */
-        }
-        .header-line::before {
-            left: 0;
-        }
-        .header-line::after {
-            right: 0;
-        }
-        .category h3 {
-            font-size: 22px;
-            font-weight: 700;
-            margin: 20px 0 10px;
-            color: #ffd700; /* Yellow for category headers */
-            border-bottom: 1px solid #ffd700;
-            display: inline-block;
-            padding-bottom: 5px;
-        }
-        .event {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 15px 20px;
-            margin-bottom: 15px;
-            border-radius: 8px;
-            border: 1px solid #555;
-        }
-        .event h4 {
-            font-size: 18px;
-            margin: 0;
-            color: #fff;
-        }
-        .event p {
-            margin: 5px 0 0;
-            color: #ccc;
-        }
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.8);
-            color: #aaa;
-            font-size: 14px;
-        }
-        footer a {
-            color: #ffd700;
-            text-decoration: none;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Military Sherpa Calendar</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #1a1a1a, #333);
+      color: #f4f4f4;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.8);
+      border-bottom: 2px solid #444;
+    }
+    header img {
+      height: 50px;
+    }
+    header h1 {
+      font-size: 24px;
+      font-weight: 700;
+      color: #fff;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    .header-line {
+      text-align: center;
+      margin: 40px 0 20px;
+      font-size: 24px;
+      font-weight: 700;
+      color: #fff;
+      position: relative;
+    }
+    .header-line::before,
+    .header-line::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 30%;
+      height: 2px;
+      background: #fff;
+    }
+    .header-line::before {
+      left: 0;
+    }
+    .header-line::after {
+      right: 0;
+    }
+    .category h3 {
+      font-size: 22px;
+      font-weight: 700;
+      margin: 20px 0 10px;
+      color: #ffd700;
+      border-bottom: 1px solid #ffd700;
+      display: inline-block;
+      padding-bottom: 5px;
+    }
+    .event {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 15px 20px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      border: 1px solid #555;
+    }
+    .event h4 {
+      font-size: 18px;
+      margin: 0;
+      color: #fff;
+    }
+    .event p {
+      margin: 5px 0 0;
+      color: #ccc;
+    }
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.8);
+      color: #aaa;
+      font-size: 14px;
+    }
+    footer a {
+      color: #ffd700;
+      text-decoration: none;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <img src="https://www.militarysherpa.com/hosted/images/72/c803090c13481d9c9e44dac14b9a94/aaa.png" alt="Military Sherpa Logo">
-        <h1>Military Sherpa Calendar</h1>
-    </header>
-    
-    <div class="container">
-        <!-- This Week Section -->
-        <div class="header-line">This Week</div>
-        <div id="this-week"></div>
+  <header>
+    <img src="https://www.militarysherpa.com/hosted/images/72/c803090c13481d9c9e44dac14b9a94/aaa.png" alt="Military Sherpa Logo">
+    <h1>Military Sherpa Calendar</h1>
+  </header>
+  
+  <div class="container">
+    <!-- Last Week Section -->
+    <div class="header-line">Last Week</div>
+    <div id="last-week"></div>
 
-        <!-- Next 90 Days Section -->
-        <div class="header-line">Next 90 Days</div>
-        <div id="next-90-days"></div>
+    <!-- This Week Section -->
+    <div class="header-line">This Week</div>
+    <div id="this-week"></div>
 
-        <!-- Beyond 90 Days Section -->
-        <div class="header-line">Beyond 90 Days</div>
-        <div id="beyond-90-days"></div>
-    </div>
+    <!-- Next Week Section -->
+    <div class="header-line">Next Week</div>
+    <div id="next-week"></div>
 
-    <footer>
-        &copy; 2025 Military Sherpa. Designed with care. <a href="#">Contact Us</a>
-    </footer>
+    <!-- Future Months Section -->
+    <div id="future-months"></div>
+  </div>
 
-    <script>
-        const apiKey = "AIzaSyCWj46WncT-E3KngpjPY60e9WUfALc5s3M";
-        const calendarId = "c_84e09ee9d480650e1a6758f0e386914e6e3e78c89628435607d5b53399c39942@group.calendar.google.com";
+  <footer>
+    &copy; 2025 Military Sherpa. Designed with care. <a href="#">Contact Us</a>
+  </footer>
 
-        function formatDate(dateString) {
-            const date = new Date(dateString);
-            const day = date.getDate();
-            const month = date.toLocaleString('default', { month: 'long' });
-            const ordinal = (n) => ["th", "st", "nd", "rd"][(n % 10) - 1] || "th";
-            return `${month} ${day}${ordinal(day)}`;
-        }
+  <script>
+    const apiKey = "AIzaSyCWj46WncT-E3KngpjPY60e9WUfALc5s3M";
+    const calendarId = "c_84e09ee9d480650e1a6758f0e386914e6e3e78c89628435607d5b53399c39942@group.calendar.google.com";
 
-        async function fetchCalendarEvents() {
-            const url = `https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events?key=${apiKey}&orderBy=startTime&singleEvents=true`;
-            const response = await fetch(url);
-            const data = await response.json();
+    // Formats a date string like "March 3rd" (or a range for multi-day events)
+    function formatDate(dateString) {
+      const date = new Date(dateString);
+      const day = date.getDate();
+      const month = date.toLocaleString('default', { month: 'long' });
+      // Simple ordinal function
+      const ordinal = (n) => {
+        const s = ["th", "st", "nd", "rd"],
+              v = n % 100;
+        return s[(v - 20) % 10] || s[v] || s[0];
+      };
+      return `${month} ${day}${ordinal(day)}`;
+    }
 
-            const now = new Date();
-            const startOfWeek = new Date(now.setDate(now.getDate() - now.getDay())); // Start of current week (Sunday)
-            const endOfWeek = new Date(startOfWeek);
-            endOfWeek.setDate(startOfWeek.getDate() + 6); // End of current week (Saturday)
+    async function fetchCalendarEvents() {
+      const url = `https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events?key=${apiKey}&orderBy=startTime&singleEvents=true`;
+      const response = await fetch(url);
+      const data = await response.json();
 
-            const ninetyDaysFromToday = new Date();
-            ninetyDaysFromToday.setDate(ninetyDaysFromToday.getDate() + 90);
+      const now = new Date();
 
-            const beyondNinetyDaysStart = new Date(ninetyDaysFromToday);
-            beyondNinetyDaysStart.setDate(beyondNinetyDaysStart.getDate() + 1); // Start of Beyond 90 Days
+      // Calculate boundaries for "This Week" (current Sunday to Saturday)
+      const startOfWeek = new Date(now);
+      startOfWeek.setDate(now.getDate() - now.getDay());
+      startOfWeek.setHours(0, 0, 0, 0);
+      const endOfWeek = new Date(startOfWeek);
+      endOfWeek.setDate(startOfWeek.getDate() + 6);
+      endOfWeek.setHours(23, 59, 59, 999);
 
-            const sectionIds = {
-                "This Week": document.getElementById('this-week'),
-                "Next 90 Days": document.getElementById('next-90-days'),
-                "Beyond 90 Days": document.getElementById('beyond-90-days'),
-            };
+      // Calculate boundaries for "Last Week" (previous Sunday to Saturday)
+      const lastWeekStart = new Date(startOfWeek);
+      lastWeekStart.setDate(startOfWeek.getDate() - 7);
+      lastWeekStart.setHours(0, 0, 0, 0);
+      const lastWeekEnd = new Date(lastWeekStart);
+      lastWeekEnd.setDate(lastWeekStart.getDate() + 6);
+      lastWeekEnd.setHours(23, 59, 59, 999);
 
-            const categories = {
-                "Significant Meetings": "(SM)",
-                "Events": "(MS)",
-                "Marketing Events": "(MK)",
-                "Leave": "(LV)"
-            };
+      // Calculate boundaries for "Next Week" (upcoming Sunday to Saturday)
+      const nextWeekStart = new Date(endOfWeek);
+      nextWeekStart.setDate(endOfWeek.getDate() + 1);
+      nextWeekStart.setHours(0, 0, 0, 0);
+      const nextWeekEnd = new Date(nextWeekStart);
+      nextWeekEnd.setDate(nextWeekStart.getDate() + 6);
+      nextWeekEnd.setHours(23, 59, 59, 999);
 
-            const categoryOrder = ["Significant Meetings", "Events", "Marketing Events", "Leave"];
+      // Mapping of section elements
+      const sectionIds = {
+        "Last Week": document.getElementById('last-week'),
+        "This Week": document.getElementById('this-week'),
+        "Next Week": document.getElementById('next-week'),
+      };
 
-            if (data.items) {
-                const eventsBySection = {
-                    "This Week": {},
-                    "Next 90 Days": {},
-                    "Beyond 90 Days": {},
-                };
+      const futureMonthsContainer = document.getElementById('future-months');
 
-                // Initialize category storage for each section
-                for (const section in eventsBySection) {
-                    categoryOrder.forEach((category) => {
-                        eventsBySection[section][category] = [];
-                    });
-                }
+      // Define categories and keywords
+      const categories = {
+        "Significant Meetings": "(SM)",
+        "Events": "(MS)",
+        "Marketing Events": "(MK)",
+        "Leave": "(LV)"
+      };
 
-                // Categorize events
-                data.items.forEach((event) => {
-                    const startDate = event.start.dateTime || event.start.date;
-                    const endDate = event.end.dateTime || event.end.date;
-                    const eventDate = new Date(startDate);
-                    const title = event.summary;
+      const categoryOrder = ["Significant Meetings", "Events", "Marketing Events", "Leave"];
 
-                    let matchedCategory = null;
-                    for (const [category, keyword] of Object.entries(categories)) {
-                        if (title.includes(keyword)) {
-                            matchedCategory = category;
-                            break;
-                        }
-                    }
-                    if (!matchedCategory) return;
+      // Prepare storage for week-based sections
+      const eventsBySection = {
+        "Last Week": {},
+        "This Week": {},
+        "Next Week": {}
+      };
 
-                    let section = null;
-                    if (eventDate >= beyondNinetyDaysStart) {
-                        section = "Beyond 90 Days";
-                    } else if (eventDate > endOfWeek && eventDate <= ninetyDaysFromToday) {
-                        section = "Next 90 Days";
-                    } else if (eventDate >= startOfWeek && eventDate <= endOfWeek) {
-                        section = "This Week";
-                    }
+      // Initialize category arrays for each week section
+      for (const section in eventsBySection) {
+        categoryOrder.forEach((category) => {
+          eventsBySection[section][category] = [];
+        });
+      }
 
-                    if (section) {
-                        const isMultiDay = new Date(startDate).toDateString() !== new Date(endDate).toDateString();
-                        const formattedDate = isMultiDay
-                            ? `${formatDate(startDate)} - ${formatDate(endDate)}`
-                            : formatDate(startDate);
+      // Storage for future months (grouped by a "Month Year" key)
+      const futureMonths = {};
 
-                        eventsBySection[section][matchedCategory].push({
-                            title: title.replace(/\(.*?\)/, "").trim(),
-                            date: formattedDate,
-                        });
-                    }
-                });
+      if (data.items) {
+        data.items.forEach((event) => {
+          const startDate = event.start.dateTime || event.start.date;
+          const endDate = event.end.dateTime || event.end.date;
+          const eventDate = new Date(startDate);
+          const title = event.summary;
 
-                // Render events in order
-                for (const [section, categories] of Object.entries(eventsBySection)) {
-                    const sectionElement = sectionIds[section];
-                    for (const category of categoryOrder) {
-                        if (categories[category].length > 0) {
-                            const categoryElement = document.createElement('div');
-                            categoryElement.classList.add('category');
-                            categoryElement.innerHTML = `<h3>${category}</h3>`;
-                            categories[category].forEach((event) => {
-                                categoryElement.innerHTML += `
-                                    <div class="event">
-                                        <h4>${event.title}</h4>
-                                        <p>${event.date}</p>
-                                    </div>`;
-                            });
-                            sectionElement.appendChild(categoryElement);
-                        }
-                    }
-                }
+          // Determine event category based on keywords
+          let matchedCategory = null;
+          for (const [category, keyword] of Object.entries(categories)) {
+            if (title.includes(keyword)) {
+              matchedCategory = category;
+              break;
             }
-        }
+          }
+          if (!matchedCategory) return;
 
-        fetchCalendarEvents();
-    </script>
+          // Format the event date (or date range for multi-day events)
+          const isMultiDay = new Date(startDate).toDateString() !== new Date(endDate).toDateString();
+          const formattedDate = isMultiDay
+            ? `${formatDate(startDate)} - ${formatDate(endDate)}`
+            : formatDate(startDate);
+
+          // Group events into the appropriate section based on their start date
+          if (eventDate >= lastWeekStart && eventDate <= lastWeekEnd) {
+            eventsBySection["Last Week"][matchedCategory].push({
+              title: title.replace(/\(.*?\)/, "").trim(),
+              date: formattedDate,
+            });
+          } else if (eventDate >= startOfWeek && eventDate <= endOfWeek) {
+            eventsBySection["This Week"][matchedCategory].push({
+              title: title.replace(/\(.*?\)/, "").trim(),
+              date: formattedDate,
+            });
+          } else if (eventDate >= nextWeekStart && eventDate <= nextWeekEnd) {
+            eventsBySection["Next Week"][matchedCategory].push({
+              title: title.replace(/\(.*?\)/, "").trim(),
+              date: formattedDate,
+            });
+          } else if (eventDate > nextWeekEnd) {
+            // Group into Future Months
+            const month = eventDate.toLocaleString('default', { month: 'long' });
+            const year = eventDate.getFullYear();
+            const monthKey = `${month} ${year}`;
+            if (!futureMonths[monthKey]) {
+              futureMonths[monthKey] = {
+                sortDate: new Date(year, eventDate.getMonth(), 1)
+              };
+              // Initialize each category for this month
+              categoryOrder.forEach((category) => {
+                futureMonths[monthKey][category] = [];
+              });
+            }
+            futureMonths[monthKey][matchedCategory].push({
+              title: title.replace(/\(.*?\)/, "").trim(),
+              date: formattedDate,
+            });
+          }
+        });
+      }
+
+      // Define the order in which week sections should appear
+      const sectionsOrder = ["Last Week", "This Week", "Next Week"];
+      sectionsOrder.forEach(section => {
+        const catGroups = eventsBySection[section];
+        const sectionElement = sectionIds[section];
+        for (const category of categoryOrder) {
+          if (catGroups[category].length > 0) {
+            const categoryElement = document.createElement('div');
+            categoryElement.classList.add('category');
+            categoryElement.innerHTML = `<h3>${category}</h3>`;
+            catGroups[category].forEach((event) => {
+              categoryElement.innerHTML += `
+                <div class="event">
+                  <h4>${event.title}</h4>
+                  <p>${event.date}</p>
+                </div>`;
+            });
+            sectionElement.appendChild(categoryElement);
+          }
+        }
+      });
+
+      // Render future months (sorted chronologically)
+      const sortedMonths = Object.keys(futureMonths).sort((a, b) => {
+        return futureMonths[a].sortDate - futureMonths[b].sortDate;
+      });
+      sortedMonths.forEach((monthKey) => {
+        // Create a header for the month (e.g., "January 2025")
+        const monthHeader = document.createElement('div');
+        monthHeader.classList.add('header-line');
+        monthHeader.textContent = monthKey;
+        futureMonthsContainer.appendChild(monthHeader);
+
+        const monthData = futureMonths[monthKey];
+        // Render each category for the month
+        for (const category of categoryOrder) {
+          if (monthData[category].length > 0) {
+            const categoryElement = document.createElement('div');
+            categoryElement.classList.add('category');
+            categoryElement.innerHTML = `<h3>${category}</h3>`;
+            monthData[category].forEach((event) => {
+              categoryElement.innerHTML += `
+                <div class="event">
+                  <h4>${event.title}</h4>
+                  <p>${event.date}</p>
+                </div>`;
+            });
+            futureMonthsContainer.appendChild(categoryElement);
+          }
+        }
+      });
+    }
+
+    fetchCalendarEvents();
+  </script>
 </body>
 </html>
